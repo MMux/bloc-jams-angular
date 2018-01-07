@@ -2,8 +2,6 @@
     function SongPlayer($rootScope, Fixtures) {
         var SongPlayer = {};
 
-
-
         var currentAlbum = Fixtures.getAlbum();
 
         /**
@@ -66,6 +64,7 @@
         @type {number}
         **/
         SongPlayer.currentTime = null;
+        SongPlayer.volume = 50;
 
         SongPlayer.play = function(song) {
             song = song || SongPlayer.currentSong;
@@ -121,8 +120,18 @@
                 playSong(song);
             }
         }
+
+        SongPlayer.setVolume = function(volume) {
+            if (currentBuzzObject) {
+                currentBuzzObject.setVolume(volume);
+            }
+            SongPlayer.volume = volume;
+        }
+
         return SongPlayer;
     }
+
+
 
     angular
     .module('blocJams')
